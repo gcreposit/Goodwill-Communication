@@ -225,68 +225,128 @@
 		 * @param {object} config
 		 */
 		
-		_init: function(domNode, config){
+		// _init: function(domNode, config){
+		// 	var self = this;
+		//
+		// 	self._execAction('_init', 0, arguments);
+		//
+		// 	config && $.extend(true, self, config);
+		//
+		// 	self._$body = $('body');
+		// 	self._domNode = domNode;
+		// 	self._$container = $(domNode);
+		// 	self._$container.addClass(self.layout.containerClass);
+		// 	self._id = domNode.id;
+		//
+		// 	self._platformDetect();
+		//
+		// 	self._brake = self._getPrefixedCSS('transition', 'none');
+		//
+		// 	self._refresh(true);
+		//
+		// 	self._$parent = self._$targets.parent().length ? self._$targets.parent() : self._$container;
+		//
+		// 	if(self.load.sort){
+		// 		self._newSort = self._parseSort(self.load.sort);
+		// 		self._newSortString = self.load.sort;
+		// 		self._activeSort = self.load.sort;
+		// 		self._sort();
+		// 		self._printSort();
+		// 	}
+		//
+		// 	self._activeFilter = self.load.filter === 'all' ?
+		// 		self.selectors.target :
+		// 		self.load.filter === 'none' ?
+		// 			'' :
+		// 			self.load.filter;
+		//
+		// 	self.controls.enable && self._bindHandlers();
+		//
+		// 	if(self.controls.toggleFilterButtons){
+		// 		self._buildToggleArray();
+		//
+		// 		for(var i = 0; i < self._toggleArray.length; i++){
+		// 			self._updateControls({filter: self._toggleArray[i], sort: self._activeSort}, true);
+		// 		};
+		// 	} else if(self.controls.enable){
+		// 		self._updateControls({filter: self._activeFilter, sort: self._activeSort});
+		// 	}
+		//
+		// 	self._filter();
+		//
+		// 	self._init = true;
+		//
+		// 	self._$container.data('mixItUp',self);
+		//
+		// 	self._execAction('_init', 1, arguments);
+		//
+		// 	self._buildState();
+		//
+		// 	self._$targets.css(self._brake);
+		//
+		// 	self._goMix(self.animation.enable);
+		// },
+
+
+		_init: function(domNode, config) {
 			var self = this;
-			
+
 			self._execAction('_init', 0, arguments);
-			
+
 			config && $.extend(true, self, config);
-			
+
 			self._$body = $('body');
 			self._domNode = domNode;
 			self._$container = $(domNode);
 			self._$container.addClass(self.layout.containerClass);
 			self._id = domNode.id;
-			
+
 			self._platformDetect();
-			
+
 			self._brake = self._getPrefixedCSS('transition', 'none');
-			
+
 			self._refresh(true);
-			
+
 			self._$parent = self._$targets.parent().length ? self._$targets.parent() : self._$container;
-			
-			if(self.load.sort){
+
+			if (self.load.sort) {
 				self._newSort = self._parseSort(self.load.sort);
 				self._newSortString = self.load.sort;
 				self._activeSort = self.load.sort;
 				self._sort();
 				self._printSort();
 			}
-			
-			self._activeFilter = self.load.filter === 'all' ? 
-				self.selectors.target : 
-				self.load.filter === 'none' ?
-					'' :
-					self.load.filter;
-			
+
+			self._activeFilter = config?.load?.filter || '.lms'; // Default to '.lms'
+
 			self.controls.enable && self._bindHandlers();
-			
-			if(self.controls.toggleFilterButtons){
+
+			if (self.controls.toggleFilterButtons) {
 				self._buildToggleArray();
-				
-				for(var i = 0; i < self._toggleArray.length; i++){
-					self._updateControls({filter: self._toggleArray[i], sort: self._activeSort}, true);
-				};
-			} else if(self.controls.enable){
-				self._updateControls({filter: self._activeFilter, sort: self._activeSort});
+
+				for (var i = 0; i < self._toggleArray.length; i++) {
+					self._updateControls({ filter: self._toggleArray[i], sort: self._activeSort }, true);
+				}
+			} else if (self.controls.enable) {
+				self._updateControls({ filter: self._activeFilter, sort: self._activeSort });
 			}
-			
+
 			self._filter();
-			
+
 			self._init = true;
-			
-			self._$container.data('mixItUp',self);
-			
+
+			self._$container.data('mixItUp', self);
+
 			self._execAction('_init', 1, arguments);
-			
+
 			self._buildState();
-			
+
 			self._$targets.css(self._brake);
-		
+
 			self._goMix(self.animation.enable);
 		},
-		
+
+
 		/**
 		 * Platform Detect
 		 * @since 2.0.0

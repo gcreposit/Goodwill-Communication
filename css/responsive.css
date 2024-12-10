@@ -413,6 +413,11 @@
     padding: 90px 0px 60px;
   }
 
+  .team-section1,
+  .contact-section {
+    padding: 0px 0px 60px;
+  }
+
   .team-section.no-padd-top {
     padding: 0px 0px 60px;
   }
